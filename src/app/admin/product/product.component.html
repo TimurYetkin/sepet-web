@@ -1,0 +1,140 @@
+<div class="modal fade" id="productModal" tabIndex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form #f="ngForm" (ngSubmit)="f.form.valid && saveProduct()">
+        <div class="modal-header">
+          <h5 class="modal-title">Product Details</h5>
+          <button class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+          <div class="alert alert-danger" *ngIf="errorMessage">
+            <strong>Error!</strong> {{ errorMessage }}
+          </div>
+
+          <div class="form-group">
+            <label for="brand">Brand</label>
+            <input
+              type="text"
+              id="brand"
+              name="brand"
+              class="form-control"
+              [(ngModel)]="product.brand"
+              #brand="ngModel"
+              required
+            />
+            <div class="alert-danger" *ngIf="f.submitted && !brand.valid">
+              Product brand is required.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              class="form-control"
+              [(ngModel)]="product.name"
+              #name="ngModel"
+              required
+            />
+            <div class="alert-danger" *ngIf="f.submitted && !name.valid">
+              Product name is required.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="category">Category</label>
+            <input
+              type="text"
+              id="category"
+              name="category"
+              class="form-control"
+              [(ngModel)]="product.category"
+              #category="ngModel"
+              required
+            />
+            <div class="alert-danger" *ngIf="f.submitted && !category.valid">
+              Product category is required.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="price">Price</label>
+            <input
+              type="number"
+              id="price"
+              name="price"
+              class="form-control"
+              [(ngModel)]="product.price"
+              #price="ngModel"
+              required
+            />
+            <div
+              class="alert-danger"
+              *ngIf="f.submitted && (!price.valid || product.price <= 0)"
+            >
+              Price is required and should be greater than 0.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="stock">Stock</label>
+            <input
+              type="number"
+              id="stock"
+              name="stock"
+              class="form-control"
+              [(ngModel)]="product.stock"
+              #stock="ngModel"
+              required
+            />
+            <div
+              class="alert-danger"
+              *ngIf="f.submitted && (!stock.valid || product.stock <= 0)"
+            >
+              Stock is required and should be greater than 0.
+            </div>
+          </div>
+
+          <div class="form-check">
+            <input
+              type="checkbox"
+              [(ngModel)]="product.secondFree"
+              [ngModelOptions]="{ standalone: true }"
+              id="secondFree"
+              class="form-check-input"
+            />
+
+            <label class="form-check-label" for="secondFree">
+              Is Second Free?
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea
+              id="description"
+              name="textarea"
+              class="form-control"
+              [(ngModel)]="product.description"
+              #description="ngModel"
+              required
+            ></textarea>
+            <div class="alert-danger" *ngIf="f.submitted && !description.valid">
+              Description is required.
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-bs-dismiss="modal">
+            Close
+          </button>
+          <button class="btn btn-primary" type="submit">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

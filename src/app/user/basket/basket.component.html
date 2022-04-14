@@ -1,0 +1,82 @@
+<div class="container">
+  <div class="alert alert-success" *ngIf="infoMessage">
+    {{ infoMessage }}
+  </div>
+  <div class="pt-5">
+    <div class="card">
+      <div class="card-header">
+        <h3>All Basket Items</h3>
+      </div>
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Product</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Price</th>
+              <th scope="col">Total Price</th>
+              <th scope="col">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of basketItemList; index as ind">
+              <th scope="row">{{ ind + 1 }}</th>
+              <td>{{ item.product?.name }}</td>
+              <td>{{ item.amount }}</td>
+              <td>{{ item.product?.price | currency: "USD" }}</td>
+              <td>{{ item.totalPrice | currency: "USD" }}</td>
+              <td>{{ item.createTime | date: "medium" }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <button
+        (click)="calculateDiscounts()"
+        class="btn w-100"
+        style="background-color: rgb(250, 197, 23)"
+      >
+        <i class="fa-solid fa-cart-shopping"></i>
+        Calculate Discounted Prices
+      </button>
+
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Product</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Price</th>
+              <th scope="col">Total Price</th>
+              <th scope="col">Discounted Price</th>
+              <th scope="col">Discount Type</th>
+              <th scope="col">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of discountedBasketList; index as ind">
+              <th scope="row">{{ ind + 1 }}</th>
+              <td>{{ item.product?.name }}</td>
+              <td>{{ item.amount }}</td>
+              <td>{{ item.product?.price | currency: "USD" }}</td>
+              <td>{{ item.totalPrice | currency: "USD" }}</td>
+              <td>{{ item.discountedPrice | currency: "USD" }}</td>
+              <td>{{ item.discountType?.label }}</td>
+              <td>{{ item.createTime | date: "medium" }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <button
+          (click)="purshase()"
+          class="btn w-100"
+          style="background-color: mediumseagreen"
+        >
+          <i class="fa-solid fa-cart-shopping"></i>
+          Purshase
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

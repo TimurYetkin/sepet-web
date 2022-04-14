@@ -1,0 +1,54 @@
+<div class="container p-3">
+  <div class="alert alert-danger" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
+
+  <div class="alert alert-success" *ngIf="infoMessage">
+    {{ infoMessage }}
+  </div>
+
+  <div class="d-flex flex-wrap">
+    <div
+      *ngFor="let item of productList; index as ind"
+      class="card m-3"
+      style="width: 300px; background-color: lightgray"
+    >
+      <fa-icon [icon]="faBlenderPhone" class="ms-auto me-auto"></fa-icon>
+
+      <div class="card-body">
+        <form #f="ngForm"></form>
+        <h5 class="card-title">{{ item.name }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">
+          {{ item.price | currency: "USD" }}
+        </h6>
+        <p class="card-text">
+          {{ item.description }}
+        </p>
+        <div class="input-group">
+          <div class="col-sm-5">
+            <input
+              type="number"
+              id="amount"
+              name="amount"
+              class="form-control"
+              [(ngModel)]="item.amount"
+              #amount="ngModel"
+              required
+              placeholder="Amount"
+            />
+          </div>
+          <div class="col-sm-7">
+            <button
+              (click)="addToBasket(item)"
+              class="btn w-100"
+              style="background-color: mediumseagreen"
+            >
+              <i class="fa-solid fa-cart-shopping"></i>
+              Add to Basket
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
